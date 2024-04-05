@@ -91,6 +91,11 @@
                 <input type="file" class="form-control-file" id="image" name="image">
                 <small class="form-text text-muted">여행 기록과 관련된 이미지를 업로드하세요.</small>
             </div>
+            <!-- 이미지 미리보기를 위한 영역 -->
+            <div class="form-group">
+                <label for="image_preview">이미지 미리보기:</label>
+                <img id="image_preview" src="#" alt="Uploaded Image Preview" style="max-width: 100%; max-height: 200px;">
+            </div>
             <button type="submit" class="btn btn-primary btn-custom">제출</button>
             <small class="form-text text-muted">여행 기록을 저장하려면 제출 버튼을 클릭하세요.</small>
         </form>
@@ -99,5 +104,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('image_preview');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        document.getElementById('image').addEventListener('change', preview_image);
+    </script>
 </body>
 </html>
